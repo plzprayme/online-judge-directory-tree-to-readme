@@ -2,7 +2,7 @@ name: build and push src auto formatter
 
 on:
   push:
-    branches: [ master ]
+    branches: [ application ]
 
 jobs:
   do:
