@@ -1,0 +1,38 @@
+name: build and push src auto formatter
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  do:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: gradle build
+        run: |
+          chmod +x gradlew
+          ./gradlew build
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: Dockerfile-application
+          push: true
+          tags: dbfpzk142/online-judge-readme-auto-formatter:latest
+

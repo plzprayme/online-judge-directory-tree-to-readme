@@ -1,0 +1,3 @@
+FROM eclipse-temurin:17-jdk-alpine
+COPY ./build/libs/readme-generator-1.0-SNAPSHOT.jar ./application.jar
+RUN chmod +x application.jar

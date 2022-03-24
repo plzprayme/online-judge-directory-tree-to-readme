@@ -1,5 +1,5 @@
 FROM eclipse-temurin:17-jdk-alpine
-
+WORKDIR /go
 RUN ls
 
 RUN chmod +x gradlew
