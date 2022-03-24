@@ -4,8 +4,12 @@ description: nothing
 outputs:
   list:
     description: ls
+  list2:
+    description: ls2
   cur:
     description: pwd
+  result:
+    description: java -jar reulst
 
 runs:
   using: 'docker'

@@ -12,11 +12,15 @@ import java.util.stream.Collectors;
 public class Main {
     public static void main(String[] args) {
 
-        final File directory = new File(System.getProperty("user.dir"));
-        System.out.println(directory.getPath());
-        System.out.println(directory.getAbsolutePath());
+        final String workspace = System.getenv().get("GITHUB_WORKSPACE"); // /github/workspace
+        System.out.println("WORKSPACE PATH : " + workspace);
+        final String hostRepositoryUrl = System.getenv().get("GITHUB_SERVER_URL") + System.getenv().get("GITHUB_WORKSPACE"); // owner/repositoryName
+        System.out.println("HOST REPOSITORY URL : " + hostRepositoryUrl);
 
-        final String hostRepositoryUrl = args[0];
+        final File directory = new File(workspace);
+        System.out.println("PATH : " + directory.getPath());
+        System.out.println("ABSOLUTE PATH : " + directory.getAbsolutePath());
+
 
         List<ProblemSolvingDirectory> directories = Arrays.stream(directory.listFiles())
                 .filter(OnlineJudgeResolver::isImplemented)
@@ -29,6 +33,7 @@ public class Main {
 
         File readme = new File("README.md");
         try {
+            System.out.println(markdown);
             Files.writeString(readme.toPath(), markdown, StandardOpenOption.WRITE);
         } catch (IOException e) {
             System.out.println(e.getMessage());
