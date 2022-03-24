@@ -12,11 +12,13 @@ import java.util.stream.Collectors;
 public class Main {
     public static void main(String[] args) {
 
-        final File directory = new File(System.getProperty("user.dir"));
-        System.out.println(directory.getPath());
-        System.out.println(directory.getAbsolutePath());
+        final String repositoryRootPath = args[0]; // /github/workspace
+        final File directory = new File(repositoryRootPath);
+        System.out.println("PATH : " + directory.getPath());
+        System.out.println("ABSOLUTE PATH : " + directory.getAbsolutePath());
 
-        final String hostRepositoryUrl = args[0];
+        final String hostRepositoryUrl = "https://github.com/" + args[1]; // owner/repositoryName
+        System.out.println("HOST REPOSITORY URL : " + hostRepositoryUrl);
 
         List<ProblemSolvingDirectory> directories = Arrays.stream(directory.listFiles())
                 .filter(OnlineJudgeResolver::isImplemented)

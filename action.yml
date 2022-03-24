@@ -4,9 +4,16 @@ description: nothing
 outputs:
   list:
     description: ls
+  list2:
+    description: ls2
   cur:
     description: pwd
+  result:
+    description: java -jar reulst
 
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ GITHUB_WORKSPACE }}
+    - ${{ GITHUB_SERVER_URL }}/${{ GITHUB_REPOSITORY }}
