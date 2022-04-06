@@ -12,9 +12,9 @@ import java.util.stream.Collectors;
 public class Main {
     public static void main(String[] args) {
 
-        final String workspace = System.getenv().get("GITHUB_WORKSPACE"); // /github/workspace
+        final String workspace = System.getenv().get("GITHUB_WORKSPACE");
         System.out.println("WORKSPACE PATH : " + workspace);
-        final String hostRepositoryUrl = System.getenv().get("GITHUB_SERVER_URL") + System.getenv().get("GITHUB_WORKSPACE"); // owner/repositoryName
+        final String hostRepositoryUrl = System.getenv().get("GITHUB_SERVER_URL") + System.getenv().get("GITHUB_REPOSITORY"); // owner/repositoryName
         System.out.println("HOST REPOSITORY URL : " + hostRepositoryUrl);
 
         final File directory = new File(workspace);
