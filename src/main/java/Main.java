@@ -7,20 +7,23 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class Main {
+
+    private static final Logger logger = Logger.getLogger(Main.class.getName());
+
     public static void main(String[] args) {
 
         final String workspace = System.getenv().get("GITHUB_WORKSPACE");
-        System.out.println("WORKSPACE PATH : " + workspace);
-        final String hostRepositoryUrl = System.getenv().get("GITHUB_SERVER_URL") + System.getenv().get("GITHUB_REPOSITORY"); // owner/repositoryName
-        System.out.println("HOST REPOSITORY URL : " + hostRepositoryUrl);
+        logger.info("WORKSPACE PATH : " + workspace);
+        final String hostRepositoryUrl = System.getenv().get("GITHUB_SERVER_URL") + "/" + System.getenv().get("GITHUB_REPOSITORY") + "/tree" + "/" + System.getenv().get("GITHUB_REF_NAME"); // owner/repositoryName
+        logger.info("HOST REPOSITORY URL : " + hostRepositoryUrl);
 
         final File directory = new File(workspace);
-        System.out.println("PATH : " + directory.getPath());
-        System.out.println("ABSOLUTE PATH : " + directory.getAbsolutePath());
-
+        logger.info("PATH : " + directory.getPath());
+        logger.info("ABSOLUTE PATH : " + directory.getAbsolutePath());
 
         List<ProblemSolvingDirectory> directories = Arrays.stream(directory.listFiles())
                 .filter(OnlineJudgeResolver::isImplemented)
@@ -33,10 +36,10 @@ public class Main {
 
         File readme = new File("README.md");
         try {
-            System.out.println(markdown);
+            logger.info(markdown);
             Files.writeString(readme.toPath(), markdown, StandardOpenOption.WRITE);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            logger.severe(e.getMessage());
         }
 
     }
