@@ -2,6 +2,7 @@ import directory.ProblemSolvingDirectory;
 import judge.OnlineJudgeResolver;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
@@ -34,10 +35,9 @@ public class Main {
                 .map(ProblemSolvingDirectory::fileTreeToMarkdown)
                 .collect(Collectors.joining());
 
-        File readme = new File("README.md");
-        try {
+        try (FileWriter fileWriter = new FileWriter("README.md", false)) {
             logger.info(markdown);
-            Files.writeString(readme.toPath(), markdown, StandardOpenOption.WRITE);
+            fileWriter.write(markdown);
         } catch (IOException e) {
             logger.severe(e.getMessage());
         }

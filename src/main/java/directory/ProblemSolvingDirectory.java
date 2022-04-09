@@ -4,21 +4,22 @@ import judge.OnlineJudge;
 import makrdown.MDHelper;
 
 import java.io.File;
-import java.util.logging.Logger;
 
 public class ProblemSolvingDirectory {
 
     private final OnlineJudge oj;
     private final File root;
     private final File[] child;
-    private final String repoUrl;
+    private final String repoDirUrl;
+    private final String repoFileUrl;
     private final StringBuilder markdown;
 
     public ProblemSolvingDirectory(File directory, OnlineJudge oj, String hostRepositoryUrl) {
         this.oj = oj;
         root = directory;
         child = root.listFiles();
-        repoUrl = hostRepositoryUrl;
+        repoDirUrl = hostRepositoryUrl;
+        repoFileUrl = hostRepositoryUrl.replace("tree", "blob");
         markdown = new StringBuilder();
     }
 
@@ -31,7 +32,7 @@ public class ProblemSolvingDirectory {
                 dfs(c,  root.getName() + "/" + c.getName(), 0);
             } else {
                 final String name = c.getName().split("\\.")[0];
-                markdown.append(listElement(c.getName(), oj.getProblemUrl(name), repoUrl + "/" + root.getName() + "/" + c.getName()));
+                markdown.append(listElement(name, oj.getProblemUrl(name), repoFileUrl + "/" + root.getName() + "/" + c.getName()));
             }
 
         }
@@ -42,7 +43,7 @@ public class ProblemSolvingDirectory {
     private void dfs(File parent, String path, Integer depth) {
         if (parent.isDirectory()) {
             markdown.append(depthSpace(depth));
-            markdown.append(listDirectoryElement(parent.getName(), repoUrl + "/" + path));
+            markdown.append(listDirectoryElement(parent.getName(), repoDirUrl + "/" + path));
 
             for (File c : parent.listFiles()) {
                 dfs(c, path + "/" + c.getName(), depth + 1);
@@ -50,7 +51,7 @@ public class ProblemSolvingDirectory {
         } else {
             final String name = parent.getName().split("\\.")[0];
             markdown.append(depthSpace(depth));
-            markdown.append(listElement(name, oj.getProblemUrl(name), repoUrl + "/" + parent.getName()));
+            markdown.append(listElement(name, oj.getProblemUrl(name), repoFileUrl + "/" + path));
         }
     }
 
