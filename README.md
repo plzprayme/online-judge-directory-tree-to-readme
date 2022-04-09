@@ -1,1 +1,5 @@
-# [.gradle](NOT IMPLEMENTED ONLINE JUDGE)  # [.idea](NOT IMPLEMENTED ONLINE JUDGE)  * [.gitignore](NOT IMPLEMENTED ONLINE JUDGE.gitignore)[풀이보기](https://github.com/plzprayme/boj/.idea/.gitignore)* [compiler.xml](NOT IMPLEMENTED ONLINE JUDGEcompiler.xml)[풀이보기](https://github.com/plzprayme/boj/.idea/compiler.xml)* [gradle.xml](NOT IMPLEMENTED ONLINE JUDGEgradle.xml)[풀이보기](https://github.com/plzprayme/boj/.idea/gradle.xml)* [jarRepositories.xml](NOT IMPLEMENTED ONLINE JUDGEjarRepositories.xml)[풀이보기](https://github.com/plzprayme/boj/.idea/jarRepositories.xml)* [misc.xml](NOT IMPLEMENTED ONLINE JUDGEmisc.xml)[풀이보기](https://github.com/plzprayme/boj/.idea/misc.xml)* [workspace.xml](NOT IMPLEMENTED ONLINE JUDGEworkspace.xml)[풀이보기](https://github.com/plzprayme/boj/.idea/workspace.xml)# [build](NOT IMPLEMENTED ONLINE JUDGE)  # [gradle](NOT IMPLEMENTED ONLINE JUDGE)  # [src](NOT IMPLEMENTED ONLINE JUDGE)  
+베타 버전 완성~
+
+# 구현 예정 기능
+1. 디렉토리 이름 설정 가능하도록 변경
+2. 기타 디렉토리도 추가되도록 변경
