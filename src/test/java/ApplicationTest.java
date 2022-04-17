@@ -16,12 +16,14 @@ public class ApplicationTest {
     private static String onlineJudgeUrl;
     private static File depth1RootDirectory;
     private static File depth2RootDirectory;
+    private static File leetcodeDirectory;
 
     @BeforeAll
     public static void setup() {
         repositoryUrl = "https://github.com/plzprayme/oj-github-action-repo";
         depth1RootDirectory = new File("src/test/resources/test-data/depth1/boj");
         depth2RootDirectory = new File("src/test/resources/test-data/depth2/boj");
+        leetcodeDirectory = new File("src/test/resources/test-data/depth2withleetcode/leetcode");
     }
 
     @Test
@@ -38,6 +40,17 @@ public class ApplicationTest {
     @Test
     public void 뎁스2_리드미_생성() {
         ProblemSolvingDirectory given = new ProblemSolvingDirectory(depth2RootDirectory, OnlineJudge.BOJ, repositoryUrl);
+
+        // when
+        String actual = given.fileTreeToMarkdown();
+
+        // then
+        System.out.println(actual);
+    }
+
+    @Test
+    public void 뎁스2_리트코드_포함_리드미_생성() {
+        ProblemSolvingDirectory given = new ProblemSolvingDirectory(leetcodeDirectory, OnlineJudge.LEETCODE, repositoryUrl);
 
         // when
         String actual = given.fileTreeToMarkdown();
