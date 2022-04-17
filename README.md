@@ -9,12 +9,12 @@
 
 # 디렉토리 생성 규칙
 ## BOJ 
-디렉토리 이름은 `boj`여야 합니다.
-파일의 이름은 문제 번호여야 합니다. `e.g. 1154.java`
+디렉토리 이름은 `boj`여야 합니다.  
+파일의 이름은 문제 번호여야 합니다. `e.g. 1154.java`  
 
 ## LEETCODE
-디렉토리 이름은 `leetcode`여야 합니다.
-파일의 이름은 leetcode 문제 페이지 url의 마지막 path여야 합니다. `e.g. increasing-order-search-tree.go`
+디렉토리 이름은 `leetcode`여야 합니다.  
+파일의 이름은 leetcode 문제 페이지 url의 마지막 path여야 합니다. `e.g. increasing-order-search-tree.go`  
 
 # 구현 예정 기능
 1. 디렉토리 이름 커스텀 가능 하도록 변경
