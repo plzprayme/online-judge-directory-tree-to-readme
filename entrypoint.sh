@@ -1,6 +1,9 @@
 #!/bin/sh
 
 echo "::set-output name=result::$(java -jar /home/application.jar)"
-echo "::set-output name=list::$(ls)"
-echo "::set-output name=list2::$(ls /home)"
-echo "::set-output name=cur::$(pwd)"
+
+git config --global --add safe.directory /github/workspace
+git config --global user.email "README-BOT@bot.com"
+git config --global user.name "README-BOT"
+git add README.md && git commit -m "Generate auto formatted README"
+git push
