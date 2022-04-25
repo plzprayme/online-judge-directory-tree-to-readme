@@ -14,7 +14,8 @@
 
 ## LEETCODE
 디렉토리 이름은 `leetcode`여야 합니다.  
-파일의 이름은 leetcode 문제 페이지 url의 마지막 path여야 합니다. `e.g. increasing-order-search-tree.go`  
+파일의 이름은 leetcode 문제 페이지 url의 마지막 path여야 합니다.  
+`e.g. increasing-order-search-tree.go`  
 
 # 구현 예정 기능
 1. 디렉토리 이름 커스텀 가능 하도록 변경
