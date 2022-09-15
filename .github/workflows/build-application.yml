@@ -17,6 +17,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: generate test data
+        working-directory: src/test/resources/test-data
+        run: /bin/sh generate.sh
+
       - name: gradle build
         run: |
           chmod +x gradlew

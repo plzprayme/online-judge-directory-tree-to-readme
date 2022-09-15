@@ -24,7 +24,11 @@ public class ProblemSolvingDirectory {
     }
 
     public String fileTreeToMarkdown() {
-        markdown.append(ojTitle(root.getName(), oj.getBaseUrl()));
+        if (oj == OnlineJudge.DIRECTORY) {
+            markdown.append(MDHelper.H1(root.getName())).append('\n');
+        } else {
+            markdown.append(ojTitle(root.getName(), oj.getBaseUrl()));
+        }
 
         for (File c : child) {
 
@@ -32,7 +36,12 @@ public class ProblemSolvingDirectory {
                 dfs(c,  root.getName() + "/" + c.getName(), 0);
             } else {
                 final String name = c.getName().split("\\.")[0];
-                markdown.append(listElement(name, oj.getProblemUrl(name), repoFileUrl + "/" + root.getName() + "/" + c.getName()));
+
+                if (oj == OnlineJudge.DIRECTORY) {
+                    markdown.append(listElement(name, repoFileUrl + "/" + root.getName() + "/" + c.getName()));
+                } else {
+                    markdown.append(listElementWithSolved(name, oj.getProblemUrl(name), repoFileUrl + "/" + root.getName() + "/" + c.getName()));
+                }
             }
 
         }
@@ -43,15 +52,20 @@ public class ProblemSolvingDirectory {
     private void dfs(File parent, String path, Integer depth) {
         if (parent.isDirectory()) {
             markdown.append(depthSpace(depth));
-            markdown.append(listDirectoryElement(parent.getName(), repoDirUrl + "/" + path));
+            markdown.append(listElement(parent.getName(), repoDirUrl + "/" + path));
 
             for (File c : parent.listFiles()) {
                 dfs(c, path + "/" + c.getName(), depth + 1);
             }
         } else {
             final String name = parent.getName().split("\\.")[0];
+
             markdown.append(depthSpace(depth));
-            markdown.append(listElement(name, oj.getProblemUrl(name), repoFileUrl + "/" + path));
+            if (oj == OnlineJudge.DIRECTORY) {
+                markdown.append(listElement(name, repoFileUrl + "/" + path));
+            } else {
+                markdown.append(listElementWithSolved(name, oj.getProblemUrl(name), repoFileUrl + "/" + path));
+            }
         }
     }
 
@@ -59,11 +73,11 @@ public class ProblemSolvingDirectory {
         return MDHelper.H1(MDHelper.link(name, url)) + "\n";
     }
 
-    private String listElement(String id, String ojUrl, String myUrl) {
+    private String listElementWithSolved(String id, String ojUrl, String myUrl) {
         return MDHelper.list(MDHelper.link(id, ojUrl) + " - " + MDHelper.link("풀이보기", myUrl)) + "\n";
     }
 
-    private String listDirectoryElement(String name, String url) {
+    private String listElement(String name, String url) {
         return MDHelper.list(MDHelper.link(name, url)) + "\n";
     }
 

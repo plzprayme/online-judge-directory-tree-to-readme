@@ -1,4 +1,5 @@
 import directory.ProblemSolvingDirectory;
+import file.NameSortFile;
 import judge.OnlineJudgeResolver;
 
 import java.io.File;
@@ -22,12 +23,13 @@ public class Main {
         final String hostRepositoryUrl = System.getenv().get("GITHUB_SERVER_URL") + "/" + System.getenv().get("GITHUB_REPOSITORY") + "/tree" + "/" + System.getenv().get("GITHUB_REF_NAME"); // owner/repositoryName
         logger.info("HOST REPOSITORY URL : " + hostRepositoryUrl);
 
-        final File directory = new File(workspace);
+        final File directory = new NameSortFile(workspace);
         logger.info("PATH : " + directory.getPath());
         logger.info("ABSOLUTE PATH : " + directory.getAbsolutePath());
 
         List<ProblemSolvingDirectory> directories = Arrays.stream(directory.listFiles())
                 .filter(OnlineJudgeResolver::isImplemented)
+                .sorted()
                 .map(f -> OnlineJudgeResolver.resolve(f, hostRepositoryUrl))
                 .toList();
 
@@ -43,5 +45,6 @@ public class Main {
         }
 
     }
+
 
 }

@@ -2,7 +2,8 @@ package judge;
 
 public enum OnlineJudge {
     BOJ("boj", "https://www.acmicpc.net", "https://www.acmicpc.net/problem"),
-    LEETCODE("leetcode", "https://leetcode.com/", "https://leetcode.com/problems");
+    LEETCODE("leetcode", "https://leetcode.com/", "https://leetcode.com/problems"),
+    DIRECTORY("directory", "not supported", "not supported");
 
     private final String directoryName;
     private final String baseUrl;

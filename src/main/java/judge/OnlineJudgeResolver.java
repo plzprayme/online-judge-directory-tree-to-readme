@@ -8,18 +8,15 @@ import java.io.File;
 public class OnlineJudgeResolver {
 
     public static boolean isImplemented(File directory) {
-        return switch (directory.getName().toLowerCase()) {
-            case "boj" -> true;
-            case "leetcode" -> true;
-            default -> false;
-        };
+        final String name = directory.getName().toLowerCase();
+        return !name.contains(".");
     }
 
     public static ProblemSolvingDirectory resolve(File directory, String hostRepositoryUrl) {
         return switch (directory.getName().toLowerCase()) {
             case "boj" -> new ProblemSolvingDirectory(directory, OnlineJudge.BOJ, hostRepositoryUrl);
             case "leetcode" -> new ProblemSolvingDirectory(directory, OnlineJudge.LEETCODE, hostRepositoryUrl);
-            default -> throw new NotImplementedException("NOT IMPLEMENTED ONLINE JUDGE");
+            default -> new ProblemSolvingDirectory(directory, OnlineJudge.DIRECTORY, hostRepositoryUrl);
         };
     }
 
